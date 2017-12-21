@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <meta charset="UTF-8"> 
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="player1Style">
+
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style=player2Style>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-show="!isGameStarted">
+        <div class="small-12 columns">
+            <button id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-show="isGameStarted">
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">ATTACK</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
+            <button id="give-up" @click="endGame">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log" v-show="isGameStarted">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="(log, i) in attackLog" :class="[i % 2 === 0 ? 'player-turn' : 'monster-turn']">
+                  {{ log }}
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
